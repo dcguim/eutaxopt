@@ -1,0 +1,117 @@
+openapi: 3.0.0
+info:
+  title: Openapi yaml
+  version: 0.0.1
+  description: API for retrieving tax rates and to calculating tax quotes
+
+paths:
+  # Whole board operations
+  /status:
+    get:
+      summary: Status endpoint for health check
+      operationId: endpoints.status
+      responses:
+        "200":
+          description: "API is alive"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                    message:
+                      type: string
+  # Single square operations
+  /income_tax/{country}:
+    parameters:
+      - name: country
+        in: path
+        required: true
+        schema:
+          type: string
+    post:
+      summary: Return tax rate given income and country
+      operationId: endpoints.income_tax
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - income
+              - currency
+              properties:
+                income:
+                  type: number
+                  format: float
+                currency:
+                  type: string
+      responses:
+         "200":
+           description: "Return the tax quote"
+           content:
+             application/json:
+               schema:
+                 type: object
+                 properties:
+                     message:
+                       type: string
+#    get:
+#      summary: 
+
+#      requestBody:
+#        required: true
+#        content:
+#          application/json:
+#            schema:
+#              type: object
+
+      
+#  /income_tax/{country}:
+#    parameters:
+#        - name: country
+#          in: path
+#          required: true 
+#    get:
+#      summary: Return tax rate given income and country
+#      operationId: endpoints.income_tax
+#      requestBody:
+#        required: true
+#        content:
+#          application/json:
+#            schema:
+#              type: object
+#              required:
+#              - income
+#              - currency
+#              properties:
+#                income:
+#                  type: number
+#                  format: float
+#                currency:
+#                  type: string
+#
+#
+#paths:
+#  /status:
+#    get:
+#    summary: Status endpoint for health check
+##    operationId: endpoints.status
+#    responses:
+#      "200":
+#        description: "API is alive"
+#        content:
+#          application/json:
+#            schema:
+#              type: string
+#
+#
+#            properties:
+#              message:
+#                type: string
+#              env:
+#                type: string
+#
+#                  
+      
+      
